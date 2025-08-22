@@ -11,11 +11,16 @@ const Countries = () => {
     }, []);
 
     const [listItems, setListItems] = useState([]);
+
     const handleListItems = (country) => {
-        console.log(listItems);
         const visitedCountries = [...listItems, country];
-        // console.log(visitedCountries);
         setListItems(visitedCountries);
+    }
+
+    const [visitedFlags, setVisitedFlags] = useState([]);
+
+    const handleFlags = (flag) => {
+        setVisitedFlags([...visitedFlags, flag])
     }
 
     return (
@@ -28,6 +33,9 @@ const Countries = () => {
                     {
                         listItems.map((item) => (<li key={item.name.common}>{item.name.common}</li>))
                     }
+                    {
+                        visitedFlags.map((flag, idx) => <img className="flags-style" src={flag} key={idx} ></img>)
+                    }
                 </ul>
             </div>
 
@@ -35,6 +43,7 @@ const Countries = () => {
                 {countries.map(country => <Country
                     key={country.name.common}
                     handleListItems={handleListItems}
+                    handleFlags={handleFlags}
                     country={country}></Country>)
                 }
             </div>
